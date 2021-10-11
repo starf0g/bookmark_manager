@@ -2,13 +2,15 @@
 
 require 'sinatra/base'
 require 'sinatra/reloader'
+require './lib/bookmark_presenter'
 
-class BookMarkManager < Sinatra::Base
+class BookmarkManager < Sinatra::Base
   configure :development do
     register Sinatra::Reloader
   end
 
-  get '/' do
+  get '/bookmarks' do
+    @bookmarks = BookmarkPresenter.all
     erb :index
   end
 end
