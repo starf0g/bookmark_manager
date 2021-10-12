@@ -8,7 +8,7 @@ describe BookmarkPresenter do
         "https://www.bbc.com",
         "https://www.google.com"
       ]
-      bookmarks = BookmarkPresenter.all
+      bookmarks = Bookmark.all
       expect(bookmarks).to eq bookmarks_list
     end
   end

@@ -1,4 +1,4 @@
-class BookmarkPresenter
+class Bookmark
   def self.all
     [
       "https://www.github.com",

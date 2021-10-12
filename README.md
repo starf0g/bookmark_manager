@@ -1,6 +1,7 @@
 ## Database setup instructions
-1) Create the bookmark manager db
-`CREATE DATABASE "bookmark_manager";`
-2) Connect to the database we just created
-`psql bookmark_manager`
-3) Run the query saved in the file '01_create_bookmarks_table.sql'
+1) Connect to `psql`
+2) Create the database using the `psql` command `CREATE DATABASE "bookmark_manager";`
+3) Connect to the database using the `psql` command `\c bookmark_manager;`
+4) Run the query saved in the file `01_create_bookmarks_table.sql` located in db/migrations
+
+You can run the file using the `\i` command in psql
