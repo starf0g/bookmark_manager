@@ -13,3 +13,7 @@ You can run the file using the `\i` command in psql
 4) Run the query saved in the file `01_create_bookmarks_table.sql` located in db/migrations UPDATE THIS LATER
 
 You can run the file using the `\i` command in psql
+
+As a busy person
+So that I can save my url's that I use often
+I would like to add bookmarks
