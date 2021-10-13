@@ -5,11 +5,11 @@ source 'https://rubygems.org'
 ruby '3.0.2'
 
 gem 'capybara'
+gem 'pg'
 gem 'rspec'
 gem 'sinatra'
 gem 'sinatra-contrib'
 gem 'webrick', '~> 1.7'
-gem 'pg'
 
 group :development, :test do
   gem 'rspec-sinatra', '~> 0.1.2'
