@@ -9,6 +9,7 @@ gem 'pg'
 gem 'rspec'
 gem 'sinatra'
 gem 'sinatra-contrib'
+gem 'sinatra-flash'
 gem 'webrick', '~> 1.7'
 
 group :development, :test do
