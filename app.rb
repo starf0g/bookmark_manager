@@ -5,7 +5,9 @@ require 'sinatra/reloader'
 require 'sinatra/flash'
 require 'uri'
 require './lib/bookmark'
+require './lib/comment'
 require './database_connection_setup'
+require 'pg'
 
 class BookmarkManager < Sinatra::Base
   enable :sessions, :method_override
@@ -46,6 +48,16 @@ class BookmarkManager < Sinatra::Base
   patch '/bookmarks/:id' do
     Bookmark.update(id: params[:id], title: params[:title], url: params[:url])
     redirect('/bookmarks')
+  end
+
+  get '/bookmarks/:id/comments/new' do
+    @bookmark_id = params[:id]
+    erb :'comments/new'
+  end
+
+  post '/bookmarks/:id/comments' do
+    Comment.create(text: params[:comment], bookmark_id: params[:id])
+    redirect '/bookmarks'
   end
 
   run! if app_file == $PROGRAM_NAME
