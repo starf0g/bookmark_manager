@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 require 'bookmark'
 require 'database_helpers'
 

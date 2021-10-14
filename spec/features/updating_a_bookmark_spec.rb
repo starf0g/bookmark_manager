@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 feature 'Updating a bookmark' do
   scenario 'A user can update a bookmark' do
     bookmark = Bookmark.create(url: 'http://www.makersacademy.com', title: 'Makers Academy')

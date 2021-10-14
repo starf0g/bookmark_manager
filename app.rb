@@ -3,7 +3,7 @@
 require 'sinatra/base'
 require 'sinatra/reloader'
 require './lib/bookmark'
-require 'pg'
+require './database_connection_setup'
 
 class BookmarkManager < Sinatra::Base
   enable :sessions, :method_override
