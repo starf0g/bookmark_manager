@@ -65,6 +65,32 @@ class BookmarkManager < Sinatra::Base
     @bookmark_id = params[:id]
     erb :'tags/new'
   end
+  
+  post '/bookmarks/:id/tags' do
+    # move this to the model
+    # we need to create the tag
+    # we then need to add an entry to the BookmarksTags table to link the
+    # bookmark id with the tag id
+
+    # connect to the db
+    connection = PG.connect(dbname: 'bookmark_manager_test')
+    # create the tag and store the id and content
+    result = connection.exec_params(
+      "INSERT INTO tags (content) VALUES($1) RETURNING id, content;",
+      [params[:tag]]
+    )
+    # add the bookmark id and tag id to the bookmarks_tags db
+    connection.exec_params(
+      "INSERT INTO bookmarks_tags (bookmark_id, tag_id) VALUES($1, $2)",
+      [params[:id], result[0]['id']]
+    )
+    p params[:tag]
+    p params[:id]
+    p result[0]['id']
+    p result[0]['content']
+    
+    redirect '/bookmarks'
+  end
 
   run! if app_file == $PROGRAM_NAME
 end
