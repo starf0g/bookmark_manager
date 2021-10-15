@@ -78,10 +78,14 @@ class BookmarkManager < Sinatra::Base
     # create the tag and store the id and content
     tag = Tag.create(content: params[:tag])
     # add the bookmark id and tag id to the bookmarks_tags db
-    connection.exec_params(
-      "INSERT INTO bookmarks_tags (bookmark_id, tag_id) VALUES($1, $2)",
-      [params[:id], tag.id]
-    )
+    # connection.exec_params(
+    #   "INSERT INTO bookmarks_tags (bookmark_id, tag_id) VALUES($1, $2)",
+    #   [params[:id], tag.id]
+    # )
+    BookmarkTag.create(bookmark_id: params[:id], tag_id: tag.id)
+
+
+    # debugging
     p params[:tag]
     p params[:id]
     # p result[0]['id']
