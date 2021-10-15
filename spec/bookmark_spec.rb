@@ -86,26 +86,12 @@ describe Bookmark do
   end
 
   describe '#tags' do
-    it 'returns a list of tags on the bookmark' do
-      # create bookmark
+    let(:tag_class) { double(:tag_class) }
+    it 'calls .where on the Tag class' do
       bookmark = Bookmark.create(title: 'Makers Academy', url: 'http://www.makersacademy.com')
-      # create tag for bookmark
-      
-      result = DatabaseConnection.query(
-        "INSERT INTO tags (content) VALUES($1) RETURNING id, content;",
-        ['test tag']
-      )
-      # create the bookmarks_tags entry
-      DatabaseConnection.query(
-        "INSERT INTO bookmarks_tags (bookmark_id, tag_id) VALUES($1, $2)",
-        [bookmark.id, result[0]['id']]
-      )
+      expect(tag_class).to receive(:where).with(bookmark_id: bookmark.id)
 
-      tags = bookmark.tags.first
-
-      expect(tags['content']).to eq 'test tag'
+      bookmark.tags(tag_class)
     end
   end
-
-
 end

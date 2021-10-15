@@ -7,6 +7,7 @@ require 'uri'
 require './lib/bookmark'
 require './lib/comment'
 require './lib/tag'
+require './lib/bookmark_tag'
 require './database_connection_setup'
 require 'pg'
 
@@ -68,31 +69,8 @@ class BookmarkManager < Sinatra::Base
   end
   
   post '/bookmarks/:id/tags' do
-    # move this to the model
-    # we need to create the tag
-    # we then need to add an entry to the BookmarksTags table to link the
-    # bookmark id with the tag id
-
-    # connect to the db
-    connection = PG.connect(dbname: 'bookmark_manager_test')
-    # create the tag and store the id and content
     tag = Tag.create(content: params[:tag])
-    # add the bookmark id and tag id to the bookmarks_tags db
-    # connection.exec_params(
-    #   "INSERT INTO bookmarks_tags (bookmark_id, tag_id) VALUES($1, $2)",
-    #   [params[:id], tag.id]
-    # )
     BookmarkTag.create(bookmark_id: params[:id], tag_id: tag.id)
-
-
-    # debugging
-    p params[:tag]
-    p params[:id]
-    # p result[0]['id']
-    # p result[0]['content']
-    p tag.id
-    p tag.content
-    
     redirect '/bookmarks'
   end
 
