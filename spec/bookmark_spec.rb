@@ -84,4 +84,27 @@ describe Bookmark do
       bookmark.comments(comment_class)
     end
   end
+
+  describe '#tags' do
+    it 'returns a list of tags on the bookmark' do
+      # create bookmark
+      bookmark = Bookmark.create(title: 'Makers Academy', url: 'http://www.makersacademy.com')
+      # create tag for bookmark
+      result = DatabaseConnection.query(
+        "INSERT INTO tags (content) VALUES($1) RETURNING id, content;",
+        ['test tag']
+      )
+      # create the bookmarks_tags entry
+      DatabaseConnection.query(
+        "INSERT INTO bookmarks_tags (bookmark_id, tag_id) VALUES($1, $2)",
+        [bookmark.id, result[0]['id']]
+      )
+
+      tag = bookmark.tags.first
+
+      expect(tag['content']).to eq 'test tag'
+    end
+  end
+
+
 end

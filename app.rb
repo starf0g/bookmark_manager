@@ -6,6 +6,7 @@ require 'sinatra/flash'
 require 'uri'
 require './lib/bookmark'
 require './lib/comment'
+require './lib/tag'
 require './database_connection_setup'
 require 'pg'
 
@@ -75,19 +76,18 @@ class BookmarkManager < Sinatra::Base
     # connect to the db
     connection = PG.connect(dbname: 'bookmark_manager_test')
     # create the tag and store the id and content
-    result = connection.exec_params(
-      "INSERT INTO tags (content) VALUES($1) RETURNING id, content;",
-      [params[:tag]]
-    )
+    tag = Tag.create(content: params[:tag])
     # add the bookmark id and tag id to the bookmarks_tags db
     connection.exec_params(
       "INSERT INTO bookmarks_tags (bookmark_id, tag_id) VALUES($1, $2)",
-      [params[:id], result[0]['id']]
+      [params[:id], tag.id]
     )
     p params[:tag]
     p params[:id]
-    p result[0]['id']
-    p result[0]['content']
+    # p result[0]['id']
+    # p result[0]['content']
+    p tag.id
+    p tag.content
     
     redirect '/bookmarks'
   end

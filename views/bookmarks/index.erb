@@ -31,7 +31,7 @@
           </form>
           <ul>
             <% bookmark.tags.each do |tag| %>
-              <li><%= tag.text %></li>
+              <li><%= tag['content'] %></li>
             <% end %>
           </ul>
         </li>
