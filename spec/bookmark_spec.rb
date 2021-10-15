@@ -74,6 +74,30 @@ describe Bookmark do
     end
   end
 
+  describe '.where' do
+    it 'returns bookmarks with the given tag id' do
+      # create bookmark
+      bookmark = Bookmark.create(url: "http://www.makersacademy.com", title: "Makers Academy")
+      # create tags
+      tag1 = Tag.create(content: 'test tag 1')
+      tag2 = Tag.create(content: 'test tag 2')
+      # create bookmark to tag links
+      BookmarkTag.create(bookmark_id: bookmark.id, tag_id: tag1.id)
+      BookmarkTag.create(bookmark_id: bookmark.id, tag_id: tag2.id)
+
+      # get the bookmarks linked to our tag
+      bookmarks = Bookmark.where(tag_id: tag1.id)
+      result = bookmarks.first
+
+      # tests
+      expect(bookmarks.length).to eq 1
+      expect(result).to be_a Bookmark
+      expect(result.id).to eq bookmark.id
+      expect(result.title).to eq bookmark.title
+      expect(result.url).to eq bookmark.url
+    end
+  end
+
   let(:comment_class) { double(:comment_class) }
 
   describe '#comments' do
