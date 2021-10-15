@@ -26,6 +26,9 @@
               <li><%= comment.text %></li>
             <% end %>
           </ul>
+          <form action="/bookmarks/<%= bookmark.id %>/tags/new" method="get">
+            <input type="submit" value="Add Tag" />
+          </form>
         </li>
       <% end %>
     </ul>

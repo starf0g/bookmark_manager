@@ -7,7 +7,7 @@ require 'bookmark'
 describe Comment do
   describe '.create' do
     it 'creates a new comment' do
-      bookmark = Bookmark.create(url:  "http://www.makersacademy.com", title: "Makers Academy")
+      bookmark = Bookmark.create(url: "http://www.makersacademy.com", title: "Makers Academy")
       comment = Comment.create(text: 'This is a test comment', bookmark_id: bookmark.id)
 
       persisted_data = persisted_data(table: 'comments', id: comment.id)
@@ -21,7 +21,7 @@ describe Comment do
 
   describe '.where' do
     it 'gets the relevant comments from the database' do
-      bookmark = Bookmark.create(url:  "http://www.makersacademy.com", title: "Makers Academy")
+      bookmark = Bookmark.create(url: "http://www.makersacademy.com", title: "Makers Academy")
       Comment.create(text: 'This is a test comment', bookmark_id: bookmark.id)
       Comment.create(text: 'This is a second test comment', bookmark_id: bookmark.id)
 
