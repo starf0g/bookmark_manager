@@ -6,6 +6,7 @@ ruby '3.0.2'
 
 gem 'capybara'
 gem 'pg'
+gem 'rake'
 gem 'rspec'
 gem 'sinatra'
 gem 'sinatra-contrib'

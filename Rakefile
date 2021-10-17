@@ -1,10 +1,10 @@
 require 'pg'
 
-def setup_test_database
-  p 'Setting up test database...'
+task :test_database_setup do
+  p "Cleaning database..."
 
   connection = PG.connect(dbname: 'bookmark_manager_test')
 
-  # Clear the bookmarks table
+  # Clear the database
   connection.exec("TRUNCATE bookmarks, comments, tags, bookmarks_tags;")
 end
